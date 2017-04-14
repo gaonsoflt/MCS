@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="MCS.Control.CntlFooter"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MCS.Control"
+             mc:Ignorable="d" 
+             Name="root"
+             Loaded="root_Loaded"
+             Background="White">
+    <Grid Height="50" Margin="10 0 10 0">
+        <!--<TextBlock Text="{Binding ElementName=root, Path=CopyRight}" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15"/>-->
+        <TextBlock Text="Copyright © 1997-2015 GaonSoft . All rights reserved." VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15"/>
+        <Button x:Name="btnCfg" HorizontalAlignment="Right" Background="Transparent" BorderBrush="Transparent" Width="50" Click="btnCfg_Click">
+            <Image Source="..\Resources\ic_setting.png" Width="40"/>
+        </Button>
+    </Grid>
+</UserControl>
