@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,6 +56,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Control\CntlHeader.xaml.cs">
+      <DependentUpon>CntlHeader.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Control\BBPasswordBox.cs" />
     <Compile Include="Control\CntlFooter.xaml.cs">
       <DependentUpon>CntlFooter.xaml</DependentUpon>
@@ -63,6 +67,16 @@
       <DependentUpon>CntlWorkCenter.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataModel.cs" />
+    <Compile Include="HttpRestProxy.cs" />
+    <Compile Include="LoginModel.cs" />
+    <Compile Include="Model\RunStopDataModel.cs" />
+    <Compile Include="Model\UserModel.cs" />
+    <Compile Include="ProductRecordWindow.xaml.cs">
+      <DependentUpon>ProductRecordWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ProductRecordViewModel.cs" />
+    <Compile Include="RunStopViewModel.cs" />
+    <Compile Include="OrderViewModel.cs" />
     <Compile Include="OrderListViewModel.cs" />
     <Compile Include="OrderListWindow.xaml.cs">
       <DependentUpon>OrderListWindow.xaml</DependentUpon>
@@ -75,6 +89,9 @@
     <Compile Include="ProcessWindow.xaml.cs">
       <DependentUpon>ProcessWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RunStopWindow.xaml.cs">
+      <DependentUpon>RunStopWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SettingWindow.xaml.cs">
       <DependentUpon>SettingWindow.xaml</DependentUpon>
     </Compile>
@@ -82,6 +99,10 @@
     <Compile Include="EquipmentWindow.xaml.cs">
       <DependentUpon>EquipmentWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Control\CntlHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Control\CntlFooter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -118,6 +139,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ProductRecordWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RunStopWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SettingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -141,6 +170,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

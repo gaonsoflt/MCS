@@ -126,6 +126,17 @@ namespace MCS
             }
         }
 
+        private long planQuantity;
+        public long PlanQuantity
+        {
+            get { return this.planQuantity; }
+            set
+            {
+                this.planQuantity = value;
+                OnPropertyUpdate("PlanQuantity");
+            }
+        }
+
         private long productQuantity;
         public long ProductQuantity
         {

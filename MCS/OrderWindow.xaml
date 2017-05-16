@@ -47,6 +47,10 @@
                             <Button Grid.Column="1" x:Name="btnProduct" Content="생산실적등록" Click="ClickButton"/>
                             <Button Grid.Column="2" x:Name="btnOperation" Content="가동/비가동등록" Click="ClickButton"/>
                         </Grid>
+                        <cntl:CntlWorkCenter DockPanel.Dock="Top" 
+                                         WorkCenterText="{Binding WorkCenter, UpdateSourceTrigger=PropertyChanged}"
+                                         EquipmentText="{Binding Equipment, UpdateSourceTrigger=PropertyChanged}"
+                                         WorkerText="{Binding Worker, UpdateSourceTrigger=PropertyChanged}"/>
                         <Grid DockPanel.Dock="Top" x:Name="gridForm">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*"/>
@@ -62,62 +66,49 @@
                                 <RowDefinition Height="1*"/>
                                 <RowDefinition Height="1*"/>
                                 <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
                             </Grid.RowDefinitions>
                             <Border Grid.Column="0" Grid.Row="0" Background="LightGray">
-                                <TextBlock Text="작업장" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 10 0"/>
-                            </Border>
-                            <ComboBox Grid.Column="1" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-                            <!--<TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding WorkCenter, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0"/>-->
-                            
-                            <Border Grid.Column="2" Grid.Row="0" Background="LightGray">
-                                <TextBlock Text="작업자" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 10 0"/>
-                            </Border>
-                            <ComboBox Grid.Column="3" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-                            <!--<TextBlock Grid.Column="3" Grid.Row="0" Text="{Binding Worker, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0"/>-->
-
-                            <Border Grid.Column="0" Grid.Row="1" Background="LightGray">
                                 <TextBlock Text="작업지시서" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 10 0"/>
                             </Border>
-                            <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Text="{Binding OrderID, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0"/>
+                            <TextBlock Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3" Text="{Binding OrderID, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0"/>
 
-                            <Border Grid.Column="0" Grid.Row="2" Background="LightGray">
+                            <Border Grid.Column="0" Grid.Row="1" Background="LightGray">
                                 <TextBlock Text="투입품명[품번]" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 10 0"/>
                             </Border>
-                            <TextBlock Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" Text="{Binding MaterialInfo, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0"/>
+                            <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Text="{Binding MaterialInfo, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0"/>
 
-                            <Border Grid.Column="0" Grid.Row="3" Background="LightGray">
+                            <Border Grid.Column="0" Grid.Row="2" Background="LightGray">
                                 <TextBlock Text="투입수량" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 10 0"/>
                             </Border>
-                            <TextBlock Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="3" Text="{Binding MaterialQuantity, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0"/>
+                            <TextBlock Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" Text="{Binding MaterialQuantity, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0"/>
 
-                            <Border Grid.Column="0" Grid.Row="4" Background="LightGray">
+                            <Border Grid.Column="0" Grid.Row="3" Background="LightGray">
                                 <TextBlock Text="생산품명[품번]" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 10 0"/>
                             </Border>
-                            <TextBlock Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3" Text="{Binding ProductInfo, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0"/>
+                            <TextBlock Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="3" Text="{Binding ProductInfo, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0"/>
 
-                            <Border Grid.Column="0" Grid.Row="5" Background="LightGray">
+                            <Border Grid.Column="0" Grid.Row="4" Background="LightGray">
                                 <TextBlock Text="생산계획수량" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 10 0"/>
                             </Border>
-                            <TextBlock Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="3" Text="{Binding ProductQuantity, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0"/>
+                            <TextBlock Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3" Text="{Binding PlanQuantity, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0"/>
 
-                            <Border Grid.Column="0" Grid.Row="6" Background="LightGray">
+                            <Border Grid.Column="0" Grid.Row="5" Background="LightGray">
                                 <TextBlock Text="생산수량" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 10 0"/>
                             </Border>
-                            <TextBlock Grid.Column="1" Grid.Row="6" Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0"/>
-                            <Border Grid.Column="2" Grid.Row="6" Background="LightGray">
+                            <TextBlock Grid.Column="1" Grid.Row="5" Text="{Binding ProductQuantity, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0"/>
+                            <Border Grid.Column="2" Grid.Row="5" Background="LightGray">
                                 <TextBlock Text="불량수량" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 10 0"/>
                             </Border>
-                            <TextBlock Grid.Column="3" Grid.Row="6" Text="{Binding Faulty, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0"/>
+                            <TextBlock Grid.Column="3" Grid.Row="5" Text="{Binding Faulty, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0"/>
 
-                            <Border Grid.Column="0" Grid.Row="7" Background="LightGray">
+                            <Border Grid.Column="0" Grid.Row="6" Background="LightGray">
                                 <TextBlock Text="작업시작시간" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 10 0"/>
                             </Border>
-                            <TextBlock Grid.Column="1" Grid.Row="7" Text="{Binding WorkStartDT, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0"/>
-                            <Border Grid.Column="2" Grid.Row="7" Background="LightGray">
+                            <TextBlock Grid.Column="1" Grid.Row="6" Text="{Binding WorkStartDT, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0"/>
+                            <Border Grid.Column="2" Grid.Row="6" Background="LightGray">
                                 <TextBlock Text="작업종료시간" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 10 0"/>
                             </Border>
-                            <TextBlock Grid.Column="3" Grid.Row="7" Text="{Binding WorkEndDt, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0"/>
+                            <TextBlock Grid.Column="3" Grid.Row="6" Text="{Binding WorkEndDt, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0"/>
                         </Grid>
                     </DockPanel>
                 </ScrollViewer>

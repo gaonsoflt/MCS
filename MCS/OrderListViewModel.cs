@@ -12,6 +12,39 @@ namespace MCS
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        private string workCenter;
+        public string WorkCenter
+        {
+            get { return this.workCenter; }
+            set
+            {
+                this.workCenter = value;
+                OnPropertyUpdate("WorkCenter");
+            }
+        }
+
+        private string equipment;
+        public string Equipment
+        {
+            get { return this.equipment; }
+            set
+            {
+                this.equipment = value;
+                OnPropertyUpdate("Equipment");
+            }
+        }
+
+        private string worker;
+        public string Worker
+        {
+            get { return this.worker; }
+            set
+            {
+                this.worker = value;
+                OnPropertyUpdate("Worker");
+            }
+        }
+
         private DateTime selectedDate;
         public DateTime SelectedDate
         {

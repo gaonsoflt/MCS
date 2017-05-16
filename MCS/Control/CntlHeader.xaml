@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="MCS.Control.CntlHeader"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MCS.Control"
+             mc:Ignorable="d"  
+             Name="root"
+             Background="White">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="VisibilityConverter"/>
+    </UserControl.Resources>
+    <Grid Height="150" HorizontalAlignment="Stretch">
+        <Grid.Background>
+            <SolidColorBrush Color="#FF3399FF"/>
+        </Grid.Background>
+        <!--<Button x:Name="btnBack" Width="150" Content="&lt; 뒤로" Visibility="{Binding Path=BackBtnVisible, Converter={StaticResource VisibilityConverter}, FallbackValue=Hidden}" Background="Transparent" FontSize="30" Foreground="White" HorizontalAlignment="Left" BorderBrush="Transparent" />-->
+        <!--<Button x:Name="btnBack" Width="150" Content="&lt; 뒤로" Visibility="{Binding Path=BackBtnVisible, ElementName=root}" Background="Transparent" FontSize="30" Foreground="White" HorizontalAlignment="Left" BorderBrush="Transparent" />-->
+        <TextBlock Text="{Binding Path=TitleText, ElementName=root}" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="40" Foreground="White"/>
+    </Grid>
+</UserControl>

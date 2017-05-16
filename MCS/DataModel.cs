@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MCS.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -40,6 +41,16 @@ namespace MCS
             set
             {
                 this.equipment = value;
+            }
+        }
+
+        private UserModel user;
+        public UserModel User
+        {
+            get { return this.user; }
+            set
+            {
+                this.user = value;
             }
         }
 
@@ -158,6 +169,16 @@ namespace MCS
             set
             {
                 this.productQuantity = value;
+            }
+        }
+
+        private long planQuantity;
+        public long PlanQuantity
+        {
+            get { return this.planQuantity; }
+            set
+            {
+                this.planQuantity = value;
             }
         }
 

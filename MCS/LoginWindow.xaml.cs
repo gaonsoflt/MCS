@@ -1,7 +1,9 @@
-﻿using System;
+﻿using MCS.Model;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,11 +23,15 @@ namespace MCS
     /// </summary>
     public partial class LoginWindow : Window
     {
+        LoginModel loginModel;
         public LoginWindow()
         {
             InitializeComponent();
 
             this.DataContext = new LoginViewModel();
+            this.loginModel = new LoginModel();
+
+            loginModel.OnLogin += new LoginModel.SetLoginHandler(OnLogin);
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
@@ -70,7 +76,7 @@ namespace MCS
                 return;
             }
 
-            DoLogin(CheckLoginInfo(viewModel.LoginID, viewModel.LoginPW));
+            CheckLoginInfo(viewModel.LoginID, viewModel.LoginPW);
         }
 
         private void ClearLoginForm()
@@ -81,29 +87,42 @@ namespace MCS
             viewModel.LoginPW = "";
         }
 
-        private bool CheckLoginInfo(string id, string pw)
+        private void CheckLoginInfo(string id, string pw)
         {
             //MessageBox.Show(string.Format("ID={0}, Password={1}", id, pw));
-            string _id = "admin";
-            string _pw = "1234";
 
-            // API call 사용자 인증
-            if (id.Equals(_id) && pw.Equals(_pw))
+            if (cbTest.IsChecked.Value)
             {
-                // 인증결과로 사용자 정보를 받아서 DataModel 에 담기
-                return true;
+                // test data
+                string _id = "admin";
+                string _pw = "a1234";
+                if (id.Equals(_id) && pw.Equals(_pw))
+                {
+                    // 인증결과로 사용자 정보를 받아서 DataModel 에 담기
+                    DataModel.GetModel().Worker = "홍길동";
+                    DataModel.GetModel().WorkerID = id;
+                    OnLogin(true);
+                }
+                else
+                {
+                    OnLogin(false);
+                }
             }
-            return false;
+            else
+            {
+                // API call 사용자 인증
+                loginModel.CheckLogin(id, pw);
+            }
         }
 
-        private void DoLogin(bool success)
+        private void OnLogin(bool success)
         {
             var viewModel = this.DataContext as LoginViewModel;
-            if (CheckLoginInfo(viewModel.LoginID, viewModel.LoginPW))
+            if (success)
             {
                 DataModel.GetModel().WorkCenter = viewModel.SelectedWorkCenter;
                 DataModel.GetModel().WorkerID = viewModel.LoginID;
-                DataModel.GetModel().WorkerPW = viewModel.LoginPW;
+                //DataModel.GetModel().WorkerPW = viewModel.LoginPW;
 
                 if (viewModel.IsSaveLoginInfo)
                 {
@@ -113,11 +132,8 @@ namespace MCS
                 {
                     viewModel.ClearLoginInfo();
                 }
-                //  API call 사용자 정보 가져와서 담기
-                DataModel.GetModel().Worker = "홍길동";
-                ////////////////////////////////////////////////
 
-                MessageBox.Show("로그인 성공");
+                MessageBox.Show("로그인 성공\n" + DataModel.GetModel().Worker + "님 반갑습니다.");
                 EquipmentWindow window = new EquipmentWindow();
                 window.Show();
                 this.Close();

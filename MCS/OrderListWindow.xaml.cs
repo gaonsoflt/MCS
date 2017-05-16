@@ -33,9 +33,25 @@ namespace MCS
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var modelView = this.DataContext as OrderListViewModel;
-            modelView.OrderList = OrderListViewModel.GetSampleData();
-            modelView.SelectedDate = DateTime.Today;
+            UpdateWorkCenterForm();
+            UpdateForm();
+        }
+
+        private void UpdateWorkCenterForm()
+        {
+            var viewModel = this.DataContext as OrderListViewModel;
+            DataModel model = DataModel.GetModel();
+            viewModel.WorkCenter = model.WorkCenter;
+            viewModel.Equipment = model.Equipment;
+            viewModel.Worker = model.Worker;
+        }
+
+        private void UpdateForm()
+        {
+            DataModel model = DataModel.GetModel();
+            var viewModel = this.DataContext as OrderListViewModel;
+            viewModel.OrderList = OrderListViewModel.GetSampleData();
+            viewModel.SelectedDate = DateTime.Today;
         }
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)
@@ -46,12 +62,14 @@ namespace MCS
         private void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DataRowView rowView = dataGrid.SelectedItem as DataRowView;
-            string msg = "[" + rowView.Row["OrderID"].ToString() + "] 을 선택하시겠습니까?";
+            string orderID = rowView.Row["OrderID"].ToString();
+            string msg = "[" + orderID + "] 을 선택하시겠습니까?";
             if (MessageBox.Show(msg, "알림", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                OrderWindow window = new OrderWindow();
+                OrderWindow window = new OrderWindow(orderID);
                 if (window.ShowDialog().Value)
                 {
+                    // 정상적으로 처리 되었기때문에 ture가 넘어오면 바로 가동현황으로 넘어간다
                     this.Close();
                 }
             }

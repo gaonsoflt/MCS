@@ -19,20 +19,47 @@ namespace MCS
     /// </summary>
     public partial class OrderWindow : Window
     {
+        string orderID;
+
         public OrderWindow()
         {
             InitializeComponent();
+            this.DataContext = new OrderViewModel();
         }
 
         public OrderWindow(string orderID)
         {
             InitializeComponent();
+            this.orderID = orderID;
+            this.DataContext = new OrderViewModel();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            // 작업장 리스트 가져오기
-            // 작업자 리스트 가져오기
+            UpdateWorkCenterForm();
+            UpdateForm();
+        }
+
+        private void UpdateWorkCenterForm()
+        {
+            var viewModel = this.DataContext as OrderViewModel;
+            DataModel model = DataModel.GetModel();
+            viewModel.WorkCenter = model.WorkCenter;
+            viewModel.Equipment = model.Equipment;
+            viewModel.Worker = model.Worker;
+
+            viewModel.OrderID = orderID;
+        }
+
+        private void UpdateForm()
+        {
+            // GetOrderInfo Call 하여 작업지시 정보를 폼에 출력
+
+        }
+
+        private void GetOrderInfo()
+        {
+
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
@@ -42,6 +69,7 @@ namespace MCS
 
         private void ClickButton(object sender, RoutedEventArgs e)
         {
+            var viewModel = this.DataContext as OrderViewModel;
             Button btn = sender as Button;
             if (btn == btnStartWork)
             {
@@ -54,14 +82,20 @@ namespace MCS
                 msg += " 새로운 작업을 시작하시겠습니까?";
                 if (MessageBox.Show(msg, "알림", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
+                    // API Call 새로운 작업으로 변경
                     this.DialogResult = true;
+                    this.Close();
                 }
             }
             else if (btn == btnProduct)
             {
+                ProductRecordWindow window = new ProductRecordWindow(viewModel.OrderID);
+                window.ShowDialog();
             }
             else
             {
+                RunStopWindow window = new RunStopWindow(viewModel.OrderID);
+                window.ShowDialog();
             }
         }
     }

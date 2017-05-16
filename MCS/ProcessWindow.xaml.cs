@@ -36,7 +36,6 @@ namespace MCS
             // API call get order data
             //DataModel model = null;
             DataModel model = DataModel.GetModel();
-            model.Worker = "홍길동";
             model.OrderID = "작업지시서-201704020394";
             model.WorkStartDT = DateTime.Now;
             model.Quantity = 10000;
@@ -51,10 +50,13 @@ namespace MCS
                 EnableButton(true);
                 gridForm.Visibility = Visibility.Visible;
                 gridNonForm.Visibility = Visibility.Collapsed;
+
                 var viewModel = this.DataContext as ProcessViewModel;
                 viewModel.WorkCenter = model.WorkCenter;
                 viewModel.Equipment = model.Equipment;
                 viewModel.Worker = model.Worker;
+                viewModel.OrderID = model.OrderID;
+                viewModel.Quantity = model.Quantity;
                 viewModel.WorkStartDT = model.WorkStartDT;
             }
             else
@@ -73,6 +75,7 @@ namespace MCS
 
         private void ClickButton(object sender, RoutedEventArgs e)
         {
+            var viewModel = this.DataContext as ProcessViewModel;
             Button btn = sender as Button;
             if (btn == btnOrder)
             {
@@ -87,11 +90,13 @@ namespace MCS
             }
             else if (btn == btnProduct)
             {
-
+                ProductRecordWindow window = new ProductRecordWindow(viewModel.OrderID);
+                window.ShowDialog();
             }
             else
             {
-
+                RunStopWindow window = new RunStopWindow(viewModel.OrderID);
+                window.ShowDialog();
             }
         }
 
