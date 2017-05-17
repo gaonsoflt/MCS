@@ -20,6 +20,13 @@ namespace MCS.Model
             this.LoginPwd = loginPwd;
         }
 
+        public UserModel(string userId, string loginPwd, string token)
+        {
+            this.UserId = userId;
+            this.LoginPwd = loginPwd;
+            this.Token = token;
+        }
+
         [DataMember(Name = "compSeq")]
         public long CompSeq { get; set; }
 
@@ -41,5 +48,7 @@ namespace MCS.Model
         [DataMember(Name = "empSeq")]
         public long? EmpSeq { get; set; }
 
+        [DataMember(Name = "token")]
+        public string Token { get; set; }
     }
 }

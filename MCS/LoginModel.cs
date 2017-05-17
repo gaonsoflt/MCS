@@ -36,7 +36,7 @@ namespace MCS
                 StringContent content = new StringContent(JsonConvert.SerializeObject(new UserModel(_id, _pw)), Encoding.UTF8, "application/json");
 
                 var user = await Task.Run(()
-                    => rest.PostAsync<UserModel>("users/login", HttpRestProxy.ConvertStringContent(new UserModel(_id, _pw))));
+                    => rest.PostAsync<UserModel>("api/users/login", HttpRestProxy.ConvertStringContent(new UserModel(_id, _pw))));
 
                 //var user = await Task.Run(()
                 //    => rest.GetAsync<UserModel>(string.Format("users/login?u={0}&p={1}", _id, _pw)));
