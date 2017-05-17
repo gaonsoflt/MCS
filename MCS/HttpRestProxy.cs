@@ -7,6 +7,8 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 using MCS.Model;
+using System.Reflection;
+using Newtonsoft.Json;
 
 namespace MCS
 {
@@ -25,6 +27,16 @@ namespace MCS
         {
             client = new HttpClient();
             client.BaseAddress = new Uri(uri);
+        }
+
+        /// <summary>
+        /// Get StringContent converted object for Post, Put(HttpContent)
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static StringContent ConvertStringContent(object obj)
+        {
+            return new StringContent(JsonConvert.SerializeObject(obj), Encoding.UTF8, "application/json");
         }
 
         public async Task<T> GetAsync<T>(string requestUri) where T : class

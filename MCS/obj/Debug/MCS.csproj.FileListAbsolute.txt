@@ -34,3 +34,5 @@ C:\Users\gaonsoft\Downloads\스마트팩토리\source\MCS\MCS\obj\Debug\MCS.pdb
 C:\Users\gaonsoft\Downloads\스마트팩토리\source\MCS\MCS\obj\Debug\MCS.csprojResolveAssemblyReference.cache
 C:\Users\gaonsoft\Downloads\스마트팩토리\source\MCS\MCS\obj\Debug\ProductRecordWindow.g.cs
 C:\Users\gaonsoft\Downloads\스마트팩토리\source\MCS\MCS\obj\Debug\ProductRecordWindow.baml
+C:\Users\gaonsoft\Downloads\스마트팩토리\source\MCS\MCS\bin\Debug\Newtonsoft.Json.dll
+C:\Users\gaonsoft\Downloads\스마트팩토리\source\MCS\MCS\bin\Debug\Newtonsoft.Json.xml

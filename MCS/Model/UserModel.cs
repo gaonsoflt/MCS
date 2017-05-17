@@ -10,6 +10,16 @@ namespace MCS.Model
     [DataContract]
     public class UserModel
     {
+        public UserModel()
+        {
+        }
+
+        public UserModel(string userId, string loginPwd)
+        {
+            this.UserId = userId;
+            this.LoginPwd = loginPwd;
+        }
+
         [DataMember(Name = "compSeq")]
         public long CompSeq { get; set; }
 
