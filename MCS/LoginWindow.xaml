@@ -43,7 +43,13 @@
                 <ComboBox Grid.Column="0" Grid.Row="1" x:Name="cbWorkCenter"
                           ItemsSource="{Binding WorkCenterList, UpdateSourceTrigger=PropertyChanged}" 
                           SelectedItem="{Binding SelectedWorkCenter, UpdateSourceTrigger=PropertyChanged}" 
-                          VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                          VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding WcName}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
             </Grid>
             <Grid Grid.Column="0" Grid.Row="1" 
                   Background="{StaticResource brushWatermarkBackground}" 

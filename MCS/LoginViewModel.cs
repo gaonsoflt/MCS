@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MCS.Model;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -65,10 +66,10 @@ namespace MCS
             }
         }
 
-        private ObservableCollection<string> workCenterList;
-        public ObservableCollection<string> WorkCenterList
+        private List<WorkCenterModel> workCenterList;
+        public List<WorkCenterModel> WorkCenterList
         {
-            get { return (this.workCenterList != null) ? this.workCenterList : new ObservableCollection<string>(); }
+            get { return (this.workCenterList != null) ? this.workCenterList : new List<WorkCenterModel>(); }
             set
             {
                 this.workCenterList = value;

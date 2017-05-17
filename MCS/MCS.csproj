@@ -74,6 +74,7 @@
     <Compile Include="HttpRestProxy.cs" />
     <Compile Include="LoginModel.cs" />
     <Compile Include="Model\RunStopDataModel.cs" />
+    <Compile Include="Model\WorkCenterModel.cs" />
     <Compile Include="Model\UserModel.cs" />
     <Compile Include="ProductRecordWindow.xaml.cs">
       <DependentUpon>ProductRecordWindow.xaml</DependentUpon>

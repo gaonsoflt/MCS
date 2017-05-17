@@ -32,6 +32,7 @@ namespace MCS
             this.loginModel = new LoginModel();
 
             loginModel.OnLogin += new LoginModel.SetLoginHandler(OnLogin);
+            loginModel.OnResult += new LoginModel.SetRestResponseHandler(OnResult);
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
@@ -43,15 +44,27 @@ namespace MCS
         private void GetWorkCenterList()
         {
             // API를 통해 작정장 정보를 가져오기
-            ObservableCollection<string> oc = new ObservableCollection<string>();
-            oc.Add("작업장1");
-            oc.Add("작업장2");
-            oc.Add("작업장3");
-            oc.Add("작업장4");
-            oc.Add("작업장5");
+            loginModel.GetWorkCenterList();
+        }
 
-            var viewModel = this.DataContext as LoginViewModel;
-            viewModel.WorkCenterList = oc;
+        private void OnResult(object obj)
+        {
+            if (obj != null)
+            {
+                var viewModel = this.DataContext as LoginViewModel;
+                if (obj.GetType() == typeof(List<WorkCenterModel>))
+                {
+                    List<WorkCenterModel> list = obj as List<WorkCenterModel>;
+                    if (list.Count > 0)
+                    {
+                        viewModel.WorkCenterList = list;
+                    }
+                    else
+                    {
+                        MessageBox.Show("작업장을 가져오지 못했습니다.\n관리부서에 확인해주시기 바랍니다.");
+                    }
+                }
+            }
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)

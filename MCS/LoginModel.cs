@@ -15,6 +15,9 @@ namespace MCS
         public delegate void SetLoginHandler(bool isSuccess);
         public event SetLoginHandler OnLogin;
 
+        public delegate void SetRestResponseHandler(object obj);
+        public event SetRestResponseHandler OnResult;
+
         private HttpRestProxy rest;
 
         private const String KEY = "user.12345678901";
@@ -58,6 +61,20 @@ namespace MCS
             {
                 DataModel.GetModel().User = null;
                 OnLogin(false);
+            }
+        }
+
+        public async void GetWorkCenterList()
+        {
+            var workCenters = await Task.Run(()
+                    => rest.GetAsync<List<WorkCenterModel>>("api/workcenters"));
+            if (workCenters != null)
+            {
+                OnResult(workCenters);
+            }
+            else
+            {
+                OnResult(null);
             }
         }
     }
