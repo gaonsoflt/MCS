@@ -14,6 +14,13 @@ namespace MCS.Model
         {
         }
 
+        public WorkCenterModel(long CompSeq, long WcSeq, String WcName)
+        {
+            this.CompSeq = CompSeq;
+            this.WcSeq = WcSeq;
+            this.WcName = WcName;
+        }
+
         [DataMember(Name = "compSeq")]
         public long CompSeq { get; set; }
 

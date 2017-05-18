@@ -27,7 +27,6 @@ namespace MCS
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            
             UpdateForm(GetOrderInfo());
         }
 
@@ -52,7 +51,7 @@ namespace MCS
                 gridNonForm.Visibility = Visibility.Collapsed;
 
                 var viewModel = this.DataContext as ProcessViewModel;
-                viewModel.WorkCenter = model.WorkCenter;
+                viewModel.WorkCenter = model.WorkCenterName;
                 viewModel.Equipment = model.Equipment;
                 viewModel.Worker = model.Worker;
                 viewModel.OrderID = model.OrderID;

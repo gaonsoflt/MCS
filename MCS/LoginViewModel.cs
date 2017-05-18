@@ -20,7 +20,7 @@ namespace MCS
 
         public void LoadLoginInfo()
         {
-            SelectedWorkCenter = Properties.Settings.Default.WorkCenter;
+            SelectedWorkCenterName = Properties.Settings.Default.WorkCenter;
             LoginID = Properties.Settings.Default.WorkerID;
             LoginPW = Properties.Settings.Default.WorkerPW;
             IsSaveLoginInfo = Properties.Settings.Default.IsSaveLoginInfo;
@@ -28,7 +28,7 @@ namespace MCS
 
         public void SaveLoginInfo()
         {
-            Properties.Settings.Default.WorkCenter = SelectedWorkCenter;
+            Properties.Settings.Default.WorkCenter = SelectedWorkCenterName;
             Properties.Settings.Default.WorkerID = LoginID;
             Properties.Settings.Default.WorkerPW = LoginPW;
             Properties.Settings.Default.IsSaveLoginInfo = IsSaveLoginInfo;
@@ -77,8 +77,19 @@ namespace MCS
             }
         }
 
-        private string selectedWorkCenter;
-        public string SelectedWorkCenter
+        private string selectedWorkCenterName;
+        public string SelectedWorkCenterName
+        {
+            get { return this.selectedWorkCenterName; }
+            set
+            {
+                this.selectedWorkCenterName = value;
+                OnPropertyUpdate("SelectedWorkCenterName");
+            }
+        }
+
+        private WorkCenterModel selectedWorkCenter;
+        public WorkCenterModel SelectedWorkCenter
         {
             get { return this.selectedWorkCenter; }
             set

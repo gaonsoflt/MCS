@@ -58,7 +58,6 @@ namespace MCS
                     if (list.Count > 0)
                     {
                         viewModel.WorkCenterList = list;
-                        cbWorkCenter.SelectedIndex = 0;
                     }
                     else
                     {
@@ -71,7 +70,7 @@ namespace MCS
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             var viewModel = this.DataContext as LoginViewModel;
-            if (string.IsNullOrEmpty(viewModel.SelectedWorkCenter))
+            if (string.IsNullOrEmpty(viewModel.SelectedWorkCenterName))
             {
                 MessageBox.Show("작업장을 선택해주세요.");
                 Keyboard.Focus(cbWorkCenter);
@@ -113,8 +112,7 @@ namespace MCS
                 if (id.Equals(_id) && pw.Equals(_pw))
                 {
                     // 인증결과로 사용자 정보를 받아서 DataModel 에 담기
-                    DataModel.GetModel().Worker = "홍길동";
-                    DataModel.GetModel().WorkerID = id;
+                    DataModel.GetModel().User = new UserModel(id, "", "홍길동");
                     OnLogin(true);
                 }
                 else
@@ -135,8 +133,6 @@ namespace MCS
             if (success)
             {
                 DataModel.GetModel().WorkCenter = viewModel.SelectedWorkCenter;
-                DataModel.GetModel().WorkerID = viewModel.LoginID;
-                //DataModel.GetModel().WorkerPW = viewModel.LoginPW;
 
                 if (viewModel.IsSaveLoginInfo)
                 {

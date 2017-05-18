@@ -47,19 +47,17 @@ namespace MCS
                 if (user != null)
                 {
                     DataModel.GetModel().User = user;
-                    DataModel.GetModel().Worker = user.UserNm;
-                    DataModel.GetModel().WorkerID = user.UserId;
                     OnLogin(true);
                 }
                 else
                 {
-                    DataModel.GetModel().User = null;
+                    DataModel.GetModel().User = new UserModel();
                     OnLogin(false);
                 }
             }
             catch
             {
-                DataModel.GetModel().User = null;
+                DataModel.GetModel().User = new UserModel();
                 OnLogin(false);
             }
         }

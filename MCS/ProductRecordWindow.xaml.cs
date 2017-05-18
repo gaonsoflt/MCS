@@ -44,7 +44,7 @@ namespace MCS
         {
             var viewModel = this.DataContext as ProductRecordViewModel;
             DataModel model = DataModel.GetModel();
-            viewModel.WorkCenter = model.WorkCenter;
+            viewModel.WorkCenter = model.WorkCenterName;
             viewModel.Equipment = model.Equipment;
             viewModel.Worker = model.Worker;
         }

@@ -42,9 +42,10 @@
                 <TextBlock Grid.Column="0" Grid.Row="0" Text="작업장" FontWeight="Bold" />
                 <ComboBox Grid.Column="0" Grid.Row="1" x:Name="cbWorkCenter"
                           ItemsSource="{Binding WorkCenterList, UpdateSourceTrigger=PropertyChanged}" 
-                          SelectedValue="{Binding SelectedWorkCenter, UpdateSourceTrigger=PropertyChanged}" 
-                          SelectedValuePath="WcName"
                           DisplayMemberPath="WcName"
+                          SelectedValue="{Binding SelectedWorkCenterName, UpdateSourceTrigger=PropertyChanged}" 
+                          SelectedValuePath="WcName"
+                          SelectedItem="{Binding SelectedWorkCenter, UpdateSourceTrigger=PropertyChanged}"
                           IsSynchronizedWithCurrentItem="True"
                           VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 </ComboBox>

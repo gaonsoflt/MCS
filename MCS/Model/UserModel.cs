@@ -20,10 +20,18 @@ namespace MCS.Model
             this.LoginPwd = loginPwd;
         }
 
-        public UserModel(string userId, string loginPwd, string token)
+        public UserModel(string userId, string loginPwd, string userNm)
         {
             this.UserId = userId;
             this.LoginPwd = loginPwd;
+            this.UserNm = UserNm;
+        }
+
+        public UserModel(string userId, string loginPwd, string userNm, string token)
+        {
+            this.UserId = userId;
+            this.LoginPwd = loginPwd;
+            this.UserNm = UserNm;
             this.Token = token;
         }
 

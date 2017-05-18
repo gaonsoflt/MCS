@@ -21,16 +21,26 @@ namespace MCS
 
         private DataModel()
         {
-
+            this.user = new UserModel();
+            this.workCenter = new WorkCenterModel();
         }
 
-        private string workCenter;
-        public string WorkCenter
+        private WorkCenterModel workCenter;
+        public WorkCenterModel WorkCenter
         {
             get { return this.workCenter; }
             set
             {
                 this.workCenter = value;
+            }
+        }
+
+        public String WorkCenterName
+        {
+            get { return this.workCenter.WcName; }
+            set
+            {
+                this.workCenter.WcName = value;
             }
         }
 
@@ -54,33 +64,35 @@ namespace MCS
             }
         }
 
-        private string workerID;
+        //private string workerID;
         public string WorkerID
         {
-            get { return this.workerID; }
+            get {
+                return this.user.UserId;
+            }
             set
             {
-                this.workerID = value;
+                this.user.UserId = value;
             }
         }
 
-        private string workerPW;
+        //private string workerPW;
         public string WorkerPW
         {
-            get { return this.workerPW; }
+            get { return this.user.LoginPwd; }
             set
             {
-                this.workerPW = value;
+                this.user.LoginPwd = value;
             }
         }
 
-        private string worker;
+        //private string worker;
         public string Worker
         {
-            get { return this.worker; }
+            get { return this.user.UserNm; }
             set
             {
-                this.worker = value;
+                this.user.UserNm = value;
             }
         }
 

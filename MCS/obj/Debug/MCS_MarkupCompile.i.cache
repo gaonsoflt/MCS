@@ -16,5 +16,5 @@ C:\Users\gaonsoft\Downloads\스마트팩토리\source\MCS\MCS\App.xaml
 15-869047130
 Control\CntlHeader.xaml;Control\CntlFooter.xaml;Control\CntlWorkCenter.xaml;LoginWindow.xaml;OrderListWindow.xaml;OrderWindow.xaml;ProcessWindow.xaml;EquipmentWindow.xaml;ProductRecordWindow.xaml;RunStopWindow.xaml;SettingWindow.xaml;
 
-True
+False
 
