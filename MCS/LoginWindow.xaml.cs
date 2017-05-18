@@ -58,6 +58,7 @@ namespace MCS
                     if (list.Count > 0)
                     {
                         viewModel.WorkCenterList = list;
+                        cbWorkCenter.SelectedIndex = 0;
                     }
                     else
                     {

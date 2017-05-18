@@ -42,13 +42,11 @@
                 <TextBlock Grid.Column="0" Grid.Row="0" Text="작업장" FontWeight="Bold" />
                 <ComboBox Grid.Column="0" Grid.Row="1" x:Name="cbWorkCenter"
                           ItemsSource="{Binding WorkCenterList, UpdateSourceTrigger=PropertyChanged}" 
-                          SelectedItem="{Binding SelectedWorkCenter, UpdateSourceTrigger=PropertyChanged}" 
+                          SelectedValue="{Binding SelectedWorkCenter, UpdateSourceTrigger=PropertyChanged}" 
+                          SelectedValuePath="WcName"
+                          DisplayMemberPath="WcName"
+                          IsSynchronizedWithCurrentItem="True"
                           VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding WcName}"/>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
                 </ComboBox>
             </Grid>
             <Grid Grid.Column="0" Grid.Row="1" 
@@ -84,7 +82,7 @@
 
             <Button Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" x:Name="btnLogin" Content="LOGIN" Width="150" Click="btnLogin_Click"/>
             <CheckBox Grid.Column="0" Grid.Row="3" IsChecked="{Binding IsSaveLoginInfo, UpdateSourceTrigger=PropertyChanged}" Content="로그인 정보 저장" Margin="0 10 0 0"/>
-            <CheckBox Grid.Column="1" Grid.Row="3" x:Name="cbTest" IsChecked="True" Content="TEST" Margin="0 10 0 0"/>
+            <CheckBox Grid.Column="1" Grid.Row="3" x:Name="cbTest" IsChecked="False" Content="TEST" Margin="0 10 0 0"/>
         </Grid>
     </Grid>
 </Window>
