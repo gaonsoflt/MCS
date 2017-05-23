@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MCS.Model;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -42,7 +43,7 @@ namespace MCS
             var viewModel = this.DataContext as OrderListViewModel;
             DataModel model = DataModel.GetModel();
             viewModel.WorkCenter = model.WorkCenterName;
-            viewModel.Equipment = model.Equipment;
+            viewModel.Equipment = model.EquipmentName;
             viewModel.Worker = model.Worker;
         }
 
@@ -50,13 +51,15 @@ namespace MCS
         {
             DataModel model = DataModel.GetModel();
             var viewModel = this.DataContext as OrderListViewModel;
-            viewModel.OrderList = OrderListViewModel.GetSampleData();
-            viewModel.SelectedDate = DateTime.Today;
+            viewModel.OrderList = TestData.GetOrderData();
+            viewModel.SelectedToDate = DateTime.Today;
+            viewModel.SelectedFromDate = viewModel.SelectedToDate.AddDays(7);
         }
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("조회: " + dpOrderDt.SelectedDate.Value.ToString()); 
+            var viewModel = this.DataContext as OrderListViewModel;
+            MessageBox.Show("조회: " + viewModel.SelectedFromDate.ToString() + " ~ " + viewModel.SelectedToDate.ToString()); 
         }
 
         private void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)

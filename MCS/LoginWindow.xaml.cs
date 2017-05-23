@@ -43,8 +43,16 @@ namespace MCS
 
         private void GetWorkCenterList()
         {
-            // API를 통해 작정장 정보를 가져오기
-            loginModel.GetWorkCenterList();
+            if (cbTest.IsChecked.Value)
+            {
+                var viewModel = this.DataContext as LoginViewModel;
+                viewModel.WorkCenterList = TestData.GetWorkCenterList();
+            }
+            else
+            {
+                // API를 통해 작정장 정보를 가져오기
+                loginModel.GetWorkCenterList();
+            }
         }
 
         private void OnResult(object obj)
@@ -52,9 +60,9 @@ namespace MCS
             if (obj != null)
             {
                 var viewModel = this.DataContext as LoginViewModel;
-                if (obj.GetType() == typeof(List<WorkCenterModel>))
+                if (obj.GetType() == typeof(List<WorkCenter>))
                 {
-                    List<WorkCenterModel> list = obj as List<WorkCenterModel>;
+                    List<WorkCenter> list = obj as List<WorkCenter>;
                     if (list.Count > 0)
                     {
                         viewModel.WorkCenterList = list;
@@ -112,7 +120,7 @@ namespace MCS
                 if (id.Equals(_id) && pw.Equals(_pw))
                 {
                     // 인증결과로 사용자 정보를 받아서 DataModel 에 담기
-                    DataModel.GetModel().User = new UserModel(id, "", "홍길동");
+                    DataModel.GetModel().User = new User(id, "", "홍길동");
                     OnLogin(true);
                 }
                 else
@@ -133,6 +141,7 @@ namespace MCS
             if (success)
             {
                 DataModel.GetModel().WorkCenter = viewModel.SelectedWorkCenter;
+                DataModel.GetModel().IsTest = cbTest.IsChecked.Value;
 
                 if (viewModel.IsSaveLoginInfo)
                 {

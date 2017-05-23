@@ -36,10 +36,10 @@ namespace MCS
                 String _pw = BBCrypto.AESEncrypt256(KEY, IV, pw);
                 //Console.WriteLine("[" + _id + "]/[" + _pw + "]");
 
-                StringContent content = new StringContent(JsonConvert.SerializeObject(new UserModel(_id, _pw)), Encoding.UTF8, "application/json");
+                StringContent content = new StringContent(JsonConvert.SerializeObject(new User(_id, _pw)), Encoding.UTF8, "application/json");
 
                 var user = await Task.Run(()
-                    => rest.PostAsync<UserModel>("api/users/login", HttpRestProxy.ConvertStringContent(new UserModel(_id, _pw))));
+                    => rest.PostAsync<User>("api/users/login", HttpRestProxy.ConvertStringContent(new User(_id, _pw))));
 
                 //var user = await Task.Run(()
                 //    => rest.GetAsync<UserModel>(string.Format("users/login?u={0}&p={1}", _id, _pw)));
@@ -51,13 +51,13 @@ namespace MCS
                 }
                 else
                 {
-                    DataModel.GetModel().User = new UserModel();
+                    DataModel.GetModel().User = new User();
                     OnLogin(false);
                 }
             }
             catch
             {
-                DataModel.GetModel().User = new UserModel();
+                DataModel.GetModel().User = new User();
                 OnLogin(false);
             }
         }
@@ -65,7 +65,7 @@ namespace MCS
         public async void GetWorkCenterList()
         {
             var workCenters = await Task.Run(()
-                    => rest.GetAsync<List<WorkCenterModel>>("api/workcenters"));
+                    => rest.GetAsync<List<WorkCenter>>("api/workcenters"));
             if (workCenters != null)
             {
                 OnResult(workCenters);

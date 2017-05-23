@@ -43,7 +43,7 @@ namespace MCS
             var viewModel = this.DataContext as RunStopViewModel;
             DataModel model = DataModel.GetModel();
             viewModel.WorkCenter = model.WorkCenterName;
-            viewModel.Equipment = model.Equipment;
+            viewModel.Equipment = model.EquipmentName;
             viewModel.Worker = model.Worker;
 
         }
@@ -61,13 +61,13 @@ namespace MCS
             viewModel.OperationList = GetOperationData();
         }
 
-        private ObservableCollection<RunStopDataModel> GetOperationData()
+        private ObservableCollection<RunStopData> GetOperationData()
         {
             // orderID로 가동/비가동 정보 조회
-            ObservableCollection<RunStopDataModel> data = new ObservableCollection<RunStopDataModel>();
-            data.Add(new RunStopDataModel("2017-04-03", "17:00", "", 0, "가동", "ccccccccccccc"));
-            data.Add(new RunStopDataModel("2017-04-03", "15:00", "17:00", 120, "비가동", "bbbbb"));
-            data.Add(new RunStopDataModel("2017-04-03", "14:00", "15:00", 60, "가동", "aaaaaaaaaa"));
+            ObservableCollection<RunStopData> data = new ObservableCollection<RunStopData>();
+            data.Add(new RunStopData("2017-04-03", "17:00", "", 0, "가동", "ccccccccccccc"));
+            data.Add(new RunStopData("2017-04-03", "15:00", "17:00", 120, "비가동", "bbbbb"));
+            data.Add(new RunStopData("2017-04-03", "14:00", "15:00", 60, "가동", "aaaaaaaaaa"));
             return data;
         }
 

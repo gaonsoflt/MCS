@@ -66,10 +66,10 @@ namespace MCS
             }
         }
 
-        private List<WorkCenterModel> workCenterList;
-        public List<WorkCenterModel> WorkCenterList
+        private List<WorkCenter> workCenterList;
+        public List<WorkCenter> WorkCenterList
         {
-            get { return (this.workCenterList != null) ? this.workCenterList : new List<WorkCenterModel>(); }
+            get { return (this.workCenterList != null) ? this.workCenterList : new List<WorkCenter>(); }
             set
             {
                 this.workCenterList = value;
@@ -88,8 +88,8 @@ namespace MCS
             }
         }
 
-        private WorkCenterModel selectedWorkCenter;
-        public WorkCenterModel SelectedWorkCenter
+        private WorkCenter selectedWorkCenter;
+        public WorkCenter SelectedWorkCenter
         {
             get { return this.selectedWorkCenter; }
             set

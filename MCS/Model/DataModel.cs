@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MCS
+namespace MCS.Model
 {
     public class DataModel
     {
@@ -21,12 +21,14 @@ namespace MCS
 
         private DataModel()
         {
-            this.user = new UserModel();
-            this.workCenter = new WorkCenterModel();
+            this.user = new User();
+            this.workCenter = new WorkCenter();
+            this.order = new Order();
+            this.equipment = new Equipment();
         }
 
-        private WorkCenterModel workCenter;
-        public WorkCenterModel WorkCenter
+        private WorkCenter workCenter;
+        public WorkCenter WorkCenter
         {
             get { return this.workCenter; }
             set
@@ -44,8 +46,8 @@ namespace MCS
             }
         }
 
-        private string equipment;
-        public string Equipment
+        private Equipment equipment;
+        public Equipment Equipment
         {
             get { return this.equipment; }
             set
@@ -54,8 +56,14 @@ namespace MCS
             }
         }
 
-        private UserModel user;
-        public UserModel User
+        //private string equipmentName;
+        public string EquipmentName
+        {
+            get { return this.equipment.ToolName; }
+        }
+
+        private User user;
+        public User User
         {
             get { return this.user; }
             set
@@ -96,13 +104,23 @@ namespace MCS
             }
         }
 
-        private string orderID;
-        public string OrderID
+        private Order order;
+        public Order Order
         {
-            get { return this.orderID; }
+            get { return this.order; }
             set
             {
-                this.orderID = value;
+                this.order = value;
+            }
+        }
+
+        //private string orderID;
+        public string OrderID
+        {
+            get { return this.order.OrderId; }
+            set
+            {
+                this.order.OrderId = value;
             }
         }
 
@@ -231,6 +249,16 @@ namespace MCS
             set
             {
                 this.workEndDT = value;
+            }
+        }
+
+        private bool isTest;
+        public bool IsTest
+        {
+            get { return this.isTest; }
+            set
+            {
+                this.isTest = value;
             }
         }
     }

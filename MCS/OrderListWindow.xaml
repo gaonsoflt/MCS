@@ -23,7 +23,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style x:Key="DatePickerStyle1" TargetType="{x:Type DatePicker}">
+        <Style x:Key="DatePickerStyle" TargetType="{x:Type DatePicker}">
             <Setter Property="Foreground" Value="#FF333333"/>
             <Setter Property="IsTodayHighlighted" Value="True"/>
             <Setter Property="SelectedDateFormat" Value="Short"/>
@@ -198,19 +198,35 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
                 <Border Grid.Column="0" Background="LightGray">
                     <TextBlock Text="작업지시일자" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 10 0"/>
                 </Border>
-                <DatePicker Grid.Column="1" x:Name="dpOrderDt" SelectedDate="{Binding SelectedDate, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DatePickerStyle1}" CalendarStyle="{StaticResource styleCalendar}" Height="100" FontSize=" 40" VerticalContentAlignment="Center">
+                <DatePicker Grid.Column="1" x:Name="dpFromOrderDt" SelectedDate="{Binding SelectedDate, UpdateSourceTrigger=PropertyChanged}" 
+                            Style="{StaticResource DatePickerStyle}" 
+                            CalendarStyle="{StaticResource styleCalendar}" 
+                            Height="100" FontSize=" 40" BorderThickness="0" VerticalContentAlignment="Center">
                     <DatePicker.Resources>
                         <Style TargetType="{x:Type DatePickerTextBox}">
                             <Setter Property="IsReadOnly" Value="True"/>
                         </Style>
                     </DatePicker.Resources>
                 </DatePicker>
-                <Button Grid.Column="2" x:Name="btnSearch" Content="조회" Click="btnSearch_Click"></Button>
+                <TextBlock Grid.Column="2" Text="~" VerticalAlignment="Center" FontWeight="Bold"/>
+                <DatePicker Grid.Column="3" x:Name="dpToOrderDt" SelectedDate="{Binding SelectedDate, UpdateSourceTrigger=PropertyChanged}" 
+                            Style="{StaticResource DatePickerStyle}" 
+                            CalendarStyle="{StaticResource styleCalendar}" 
+                            Height="100" FontSize="40" BorderThickness="0" VerticalContentAlignment="Center">
+                    <DatePicker.Resources>
+                        <Style TargetType="{x:Type DatePickerTextBox}">
+                            <Setter Property="IsReadOnly" Value="True"/>
+                        </Style>
+                    </DatePicker.Resources>
+                </DatePicker>
+                <Button Grid.Column="4" x:Name="btnSearch" Content="조회" Click="btnSearch_Click"></Button>
             </Grid>
             <DataGrid DockPanel.Dock="Top" x:Name="dataGrid" ItemsSource="{Binding OrderList, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" SelectionChanged="dataGrid_SelectionChanged">
                 <DataGrid.Resources>

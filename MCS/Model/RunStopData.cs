@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace MCS.Model
 {
-    public class RunStopDataModel
+    public class RunStopData
     {
-        public RunStopDataModel()
+        public RunStopData()
         {
 
         }
 
-        public RunStopDataModel(string operationDate, string startTime, string stopTime, long operationTime, string operationType, string reason)
+        public RunStopData(string operationDate, string startTime, string stopTime, long operationTime, string operationType, string reason)
         {
             this.OperationDate = operationDate;
             this.StartTime = startTime;

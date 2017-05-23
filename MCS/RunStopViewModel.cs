@@ -69,8 +69,8 @@ namespace MCS
             }
         }
 
-        private ObservableCollection<RunStopDataModel> operationList;
-        public ObservableCollection<RunStopDataModel> OperationList
+        private ObservableCollection<RunStopData> operationList;
+        public ObservableCollection<RunStopData> OperationList
         {
             get { return this.operationList; }
             set

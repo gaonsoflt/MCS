@@ -69,8 +69,8 @@ namespace MCS
             }
         }
 
-        private ObservableCollection<RunStopDataModel> productRecordList;
-        public ObservableCollection<RunStopDataModel> ProductRecordList
+        private ObservableCollection<RunStopData> productRecordList;
+        public ObservableCollection<RunStopData> ProductRecordList
         {
             get { return this.productRecordList; }
             set

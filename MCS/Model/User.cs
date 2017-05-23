@@ -8,30 +8,30 @@ using System.Runtime.Serialization;
 namespace MCS.Model
 {
     [DataContract]
-    public class UserModel
+    public class User
     {
-        public UserModel()
+        public User()
         {
         }
 
-        public UserModel(string userId, string loginPwd)
+        public User(string userId, string loginPwd)
         {
             this.UserId = userId;
             this.LoginPwd = loginPwd;
         }
 
-        public UserModel(string userId, string loginPwd, string userNm)
+        public User(string userId, string loginPwd, string userNm)
         {
             this.UserId = userId;
             this.LoginPwd = loginPwd;
-            this.UserNm = UserNm;
+            this.UserNm = userNm;
         }
 
-        public UserModel(string userId, string loginPwd, string userNm, string token)
+        public User(string userId, string loginPwd, string userNm, string token)
         {
             this.UserId = userId;
             this.LoginPwd = loginPwd;
-            this.UserNm = UserNm;
+            this.UserNm = userNm;
             this.Token = token;
         }
 

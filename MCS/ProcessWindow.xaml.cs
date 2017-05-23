@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MCS.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -52,7 +53,7 @@ namespace MCS
 
                 var viewModel = this.DataContext as ProcessViewModel;
                 viewModel.WorkCenter = model.WorkCenterName;
-                viewModel.Equipment = model.Equipment;
+                viewModel.Equipment = model.EquipmentName;
                 viewModel.Worker = model.Worker;
                 viewModel.OrderID = model.OrderID;
                 viewModel.Quantity = model.Quantity;

@@ -31,8 +31,13 @@ C:\Users\gaonsoft\Downloads\스마트팩토리\source\MCS\MCS\obj\Debug\MCS.Prop
 C:\Users\gaonsoft\Downloads\스마트팩토리\source\MCS\MCS\obj\Debug\MCS.csproj.GenerateResource.Cache
 C:\Users\gaonsoft\Downloads\스마트팩토리\source\MCS\MCS\obj\Debug\MCS.exe
 C:\Users\gaonsoft\Downloads\스마트팩토리\source\MCS\MCS\obj\Debug\MCS.pdb
-C:\Users\gaonsoft\Downloads\스마트팩토리\source\MCS\MCS\obj\Debug\MCS.csprojResolveAssemblyReference.cache
 C:\Users\gaonsoft\Downloads\스마트팩토리\source\MCS\MCS\obj\Debug\ProductRecordWindow.g.cs
 C:\Users\gaonsoft\Downloads\스마트팩토리\source\MCS\MCS\obj\Debug\ProductRecordWindow.baml
 C:\Users\gaonsoft\Downloads\스마트팩토리\source\MCS\MCS\bin\Debug\Newtonsoft.Json.dll
 C:\Users\gaonsoft\Downloads\스마트팩토리\source\MCS\MCS\bin\Debug\Newtonsoft.Json.xml
+C:\Users\gaonsoft\Downloads\스마트팩토리\source\MCS\MCS\obj\Debug\WorkStartDialog.g.cs
+C:\Users\gaonsoft\Downloads\스마트팩토리\source\MCS\MCS\bin\Debug\WPFToolkit.dll
+C:\Users\gaonsoft\Downloads\스마트팩토리\source\MCS\MCS\bin\Debug\Xceed.Wpf.Toolkit.dll
+C:\Users\gaonsoft\Downloads\스마트팩토리\source\MCS\MCS\bin\Debug\WPFToolkit.pdb
+C:\Users\gaonsoft\Downloads\스마트팩토리\source\MCS\MCS\obj\Debug\WorkStartDialog.baml
+C:\Users\gaonsoft\Downloads\스마트팩토리\source\MCS\MCS\obj\Debug\MCS.csprojResolveAssemblyReference.cache

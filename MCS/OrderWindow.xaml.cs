@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MCS.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -45,7 +46,7 @@ namespace MCS
             var viewModel = this.DataContext as OrderViewModel;
             DataModel model = DataModel.GetModel();
             viewModel.WorkCenter = model.WorkCenterName;
-            viewModel.Equipment = model.Equipment;
+            viewModel.Equipment = model.EquipmentName;
             viewModel.Worker = model.Worker;
 
             viewModel.OrderID = orderID;
@@ -73,16 +74,23 @@ namespace MCS
             Button btn = sender as Button;
             if (btn == btnStartWork)
             {
-                string _orderID = DataModel.GetModel().OrderID;
-                string msg = "";
-                if (!string.IsNullOrEmpty(_orderID))
+                //string _orderID = DataModel.GetModel().OrderID;
+                //string msg = "";
+                //if (!string.IsNullOrEmpty(_orderID))
+                //{
+                //    msg += "진행중이던 작업[" + _orderID + "]을 취소하고";
+                //}
+                //msg += " 새로운 작업을 시작하시겠습니까?";
+                //if (MessageBox.Show(msg, "알림", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                //{
+                //    // API Call 새로운 작업으로 변경
+                //    this.DialogResult = true;
+                //    this.Close();
+                //}
+
+                WorkStartDialog dlg = new WorkStartDialog(DataModel.GetModel().OrderID, viewModel.OrderID);
+                if(dlg.ShowDialog().Value)
                 {
-                    msg += "진행중이던 작업[" + _orderID + "]을 취소하고\n";
-                }
-                msg += " 새로운 작업을 시작하시겠습니까?";
-                if (MessageBox.Show(msg, "알림", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                {
-                    // API Call 새로운 작업으로 변경
                     this.DialogResult = true;
                     this.Close();
                 }

@@ -8,13 +8,13 @@ using System.Runtime.Serialization;
 namespace MCS.Model
 {
     [DataContract]
-    public class WorkCenterModel
+    public class WorkCenter
     {
-        public WorkCenterModel()
+        public WorkCenter()
         {
         }
 
-        public WorkCenterModel(long CompSeq, long WcSeq, String WcName)
+        public WorkCenter(long CompSeq, long WcSeq, String WcName)
         {
             this.CompSeq = CompSeq;
             this.WcSeq = WcSeq;
