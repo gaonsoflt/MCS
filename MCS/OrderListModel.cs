@@ -22,12 +22,15 @@ namespace MCS
             rest = new HttpRestProxy();
         }
 
-        public async void GetOrderList(long from, long to)
+        public async void GetOrderList(DateTime from, DateTime to)
         {
             try
             {
+                var _from = BBConvert.CSharpMillisToJavaLong(from) * 1000;
+                var _to = BBConvert.CSharpMillisToJavaLong(to) * 1000;
+
                 var order = await Task.Run(()
-                    => rest.GetAsync<List<Order>>(String.Format("api/workorders/date?from={0}&to={1}", from.ToString(), to.ToString())));
+                    => rest.GetAsync<List<Order>>(String.Format("api/workorders/date?from={0}&to={1}", _from.ToString(), _to.ToString())));
 
                 OnResult(order);
             }

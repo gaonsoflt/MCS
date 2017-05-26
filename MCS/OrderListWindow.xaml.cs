@@ -71,10 +71,7 @@ namespace MCS
             else
             {
                 //orderListModel.GetOrderList(viewModel.SelectedFromDate.Ticks, viewModel.SelectedToDate.Ticks);
-                orderListModel.GetOrderList(
-                    BBConvert.CSharpMillisToJavaLong(viewModel.SelectedFromDate),
-                    BBConvert.CSharpMillisToJavaLong(viewModel.SelectedToDate)
-                );
+                orderListModel.GetOrderList(viewModel.SelectedFromDate, viewModel.SelectedToDate);
             }
         }
 
