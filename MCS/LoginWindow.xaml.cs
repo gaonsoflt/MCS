@@ -115,7 +115,7 @@ namespace MCS
             if (cbTest.IsChecked.Value)
             {
                 // test data
-                string _id = "admin";
+                string _id = "test";
                 string _pw = "a1234";
                 if (id.Equals(_id) && pw.Equals(_pw))
                 {
@@ -162,6 +162,11 @@ namespace MCS
                 MessageBox.Show("로그인 실패");
                 ClearLoginForm();
             }
+        }
+
+        private void cbTest_Click(object sender, RoutedEventArgs e)
+        {
+            GetWorkCenterList();
         }
     }
 }

@@ -40,7 +40,7 @@ namespace MCS
                     Button btn = new Button();
                     btn.Name = "btnEquipment" + i.ToString();
                     btn.Content = "설비" + i.ToString();
-                    btn.Click += ClickEquipmentButton;
+                    btn.Click += ClickEquipmentTestButton;
                     wp.Children.Add(btn);
                 }
             }
@@ -74,12 +74,20 @@ namespace MCS
             for (int i = 0; i < list.Count; i++)
             {
                 Button btn = new Button();
-                btn.Click += ClickEquipmentButton;
-                Binding binding = new Binding("ToolName");
-                binding.Source = list[i];
-
+                //Binding binding = new Binding("ToolName");
+                //binding.Source = list[i];
+                btn.Content = list[i].ToolName + "\n[" + ((list[i].Status != null) ? list[i].Status.MinorName : "알수없음") + "]";
                 btn.Resources = list[i].ConvertResourceDic();
-                btn.SetBinding(ContentProperty, binding);
+                //btn.SetBinding(ContentProperty, binding);
+                if (list[i].ToolStatus == 11660001)
+                {
+                    btn.IsEnabled = true;
+                    btn.Click += ClickEquipmentButton;
+                }
+                else
+                {
+                    btn.IsEnabled = false;
+                }
                 wp.Children.Add(btn);
             }
         }
@@ -89,6 +97,15 @@ namespace MCS
             Button btn = sender as Button;
             ProcessWindow window = new ProcessWindow();
             DataModel.GetModel().Equipment = Equipment.ConvertResourceToClass(btn.Resources);
+            window.Show();
+            this.Close();
+        }
+
+        private void ClickEquipmentTestButton(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            ProcessWindow window = new ProcessWindow();
+            DataModel.GetModel().Equipment = new Equipment(1, 1, btn.Name, btn.Content.ToString());
             window.Show();
             this.Close();
         }

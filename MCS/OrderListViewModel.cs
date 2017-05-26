@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MCS.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -67,8 +68,19 @@ namespace MCS
             }
         }
 
-        private DataTable orderList;
-        public DataTable OrderList
+        //private DataTable orderList;
+        //public DataTable OrderList
+        //{
+        //    get { return this.orderList; }
+        //    set
+        //    {
+        //        this.orderList = value;
+        //        OnPropertyUpdate("OrderList");
+        //    }
+        //}
+
+        private List<Order> orderList;
+        public List<Order> OrderList
         {
             get { return this.orderList; }
             set

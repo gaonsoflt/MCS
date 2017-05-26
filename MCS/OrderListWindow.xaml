@@ -205,7 +205,7 @@
                 <Border Grid.Column="0" Background="LightGray">
                     <TextBlock Text="작업지시일자" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 10 0"/>
                 </Border>
-                <DatePicker Grid.Column="1" x:Name="dpFromOrderDt" SelectedDate="{Binding SelectedDate, UpdateSourceTrigger=PropertyChanged}" 
+                <DatePicker Grid.Column="1" x:Name="dpFromOrderDt" SelectedDate="{Binding SelectedFromDate, UpdateSourceTrigger=PropertyChanged}" 
                             Style="{StaticResource DatePickerStyle}" 
                             CalendarStyle="{StaticResource styleCalendar}" 
                             Height="100" FontSize=" 40" BorderThickness="0" VerticalContentAlignment="Center">
@@ -216,7 +216,7 @@
                     </DatePicker.Resources>
                 </DatePicker>
                 <TextBlock Grid.Column="2" Text="~" VerticalAlignment="Center" FontWeight="Bold"/>
-                <DatePicker Grid.Column="3" x:Name="dpToOrderDt" SelectedDate="{Binding SelectedDate, UpdateSourceTrigger=PropertyChanged}" 
+                <DatePicker Grid.Column="3" x:Name="dpToOrderDt" SelectedDate="{Binding SelectedToDate, UpdateSourceTrigger=PropertyChanged}" 
                             Style="{StaticResource DatePickerStyle}" 
                             CalendarStyle="{StaticResource styleCalendar}" 
                             Height="100" FontSize="40" BorderThickness="0" VerticalContentAlignment="Center">
@@ -313,7 +313,7 @@
                     </Style>
                 </DataGrid.Resources>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="작업지시번호" Binding="{Binding Path=OrderID}">
+                    <DataGridTextColumn Header="작업지시번호" Binding="{Binding Path=OrderId}">
                         <DataGridTextColumn.ElementStyle>
                             <Style>
                                 <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
@@ -341,7 +341,7 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="[투입품번]&#10; 투입품명" Binding="{Binding Path=Material}">
+                    <DataGridTextColumn Header="[투입품번]&#10; 투입품명" Binding="{Binding Path=Item.ItemName}">
                         <DataGridTextColumn.ElementStyle>
                             <Style>
                                 <Setter Property="TextBlock.VerticalAlignment" Value="Center" />

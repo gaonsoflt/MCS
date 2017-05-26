@@ -1,4 +1,5 @@
 ﻿using MCS.Model;
+using MCS.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -21,10 +22,14 @@ namespace MCS
     /// </summary>
     public partial class OrderListWindow : Window
     {
+        OrderListModel orderListModel;
         public OrderListWindow()
         {
             InitializeComponent();
             this.DataContext = new OrderListViewModel();
+            this.orderListModel = new OrderListModel();
+
+            orderListModel.OnResult += new OrderListModel.SetRestResponseHandler(OnResult);
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
@@ -51,21 +56,65 @@ namespace MCS
         {
             DataModel model = DataModel.GetModel();
             var viewModel = this.DataContext as OrderListViewModel;
-            viewModel.OrderList = TestData.GetOrderData();
             viewModel.SelectedToDate = DateTime.Today;
-            viewModel.SelectedFromDate = viewModel.SelectedToDate.AddDays(7);
+            viewModel.SelectedFromDate = viewModel.SelectedToDate.AddDays(-7);
+            GetOrderList();
         }
+
+        private void GetOrderList()
+        {
+            var viewModel = this.DataContext as OrderListViewModel;
+            if (DataModel.GetModel().IsTest)
+            {
+                SetOrderList(TestData.GetOrderData());
+            }
+            else
+            {
+                //orderListModel.GetOrderList(viewModel.SelectedFromDate.Ticks, viewModel.SelectedToDate.Ticks);
+                orderListModel.GetOrderList(
+                    BBConvert.CSharpMillisToJavaLong(viewModel.SelectedFromDate),
+                    BBConvert.CSharpMillisToJavaLong(viewModel.SelectedToDate)
+                );
+            }
+        }
+
+        private void OnResult(object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetType() == typeof(List<Order>))
+                {
+                    List<Order> list = obj as List<Order>;
+                    SetOrderList(list);
+                }
+            }
+        }
+
+        private void SetOrderList(List<Order> list)
+        {
+            var viewModel = this.DataContext as OrderListViewModel;
+            viewModel.OrderList = list;
+        }
+
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
             var viewModel = this.DataContext as OrderListViewModel;
-            MessageBox.Show("조회: " + viewModel.SelectedFromDate.ToString() + " ~ " + viewModel.SelectedToDate.ToString()); 
+            if (orderListModel.CheckSearchPeriodSize(viewModel.SelectedFromDate, viewModel.SelectedToDate))
+            {
+                MessageBox.Show("조회: " + viewModel.SelectedFromDate.ToString() + " ~ " + viewModel.SelectedToDate.ToString());
+                GetOrderList();
+            }
+            else
+            {
+                MessageBox.Show("최대 7일까지만 조회할 수 있습니다.", "알림", MessageBoxButton.OK);
+            }
         }
 
         private void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DataRowView rowView = dataGrid.SelectedItem as DataRowView;
-            string orderID = rowView.Row["OrderID"].ToString();
+            string orderID = rowView.Row["OrderId"].ToString();
             string msg = "[" + orderID + "] 을 선택하시겠습니까?";
             if (MessageBox.Show(msg, "알림", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
