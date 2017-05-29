@@ -33,17 +33,20 @@ namespace MCS.Model
         [DataMember(Name = "workOrderDate")]
         public String WorkOrderDate { get; set; }
 
-        [DataMember(Name = "prodPlanNo")]
-        public String ProdPlanNo { get; set; }
+        //[DataMember(Name = "prodPlanNo")]
+        //public String ProdPlanNo { get; set; }
+        [DataMember(Name = "plan")]
+        public Plan Plan{ get; set; }
 
-        [DataMember(Name = "goodItemSeq")]
-        public long GoodItemSeq { get; set; }
-
+        //[DataMember(Name = "goodItemSeq")]
+        //public long GoodItemSeq { get; set; }
         [DataMember(Name = "item")]
         public Item Item { get; set; }
 
-        [DataMember(Name = "procSeq")]
-        public long ProcSeq { get; set; }
+        //[DataMember(Name = "procSeq")]
+        //public long ProcSeq { get; set; }
+        [DataMember(Name = "proc")]
+        public CodeMinor Proc { get; set; }
 
         [DataMember(Name = "orderQty")]
         public long OrderQty { get; set; }

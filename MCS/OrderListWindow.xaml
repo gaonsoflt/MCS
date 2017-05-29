@@ -313,6 +313,13 @@
                     </Style>
                 </DataGrid.Resources>
                 <DataGrid.Columns>
+                    <DataGridTextColumn Header="구분" Binding="{Binding Path=Plan.PlanGBN}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style>
+                                <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
                     <DataGridTextColumn Header="작업지시번호" Binding="{Binding Path=OrderId}">
                         <DataGridTextColumn.ElementStyle>
                             <Style>
@@ -320,7 +327,14 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="상태" Binding="{Binding Path=Status}">
+                    <DataGridTextColumn Header="상태" Binding="{Binding Path=Plan.Status.MinorName}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style>
+                                <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="계획완료일" Binding="{Binding Path=Plan.EndDate}">
                         <DataGridTextColumn.ElementStyle>
                             <Style>
                                 <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
@@ -334,14 +348,14 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="공정명" Binding="{Binding Path=SequenceName}">
+                    <DataGridTextColumn Header="공정명" Binding="{Binding Path=Proc.MinorName}">
                         <DataGridTextColumn.ElementStyle>
                             <Style>
                                 <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="[투입품번]&#10; 투입품명" Binding="{Binding Path=Item.ItemName}">
+                    <DataGridTextColumn Header="[투입품번]&#10; 투입품명" Binding="{Binding Path=Material}">
                         <DataGridTextColumn.ElementStyle>
                             <Style>
                                 <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
@@ -355,21 +369,21 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="[생산품번]&#10; 생산품명" Binding="{Binding Path=Product}">
+                    <DataGridTextColumn Header="[생산품번]&#10; 생산품명" Binding="{Binding Path=Item.ItemName}">
                         <DataGridTextColumn.ElementStyle>
                             <Style>
                                 <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="생산수량" Binding="{Binding Path=ProductQuantity, StringFormat='0,0.'}">
+                    <DataGridTextColumn Header="생산수량" Binding="{Binding Path=Plan.ProdPlanQty, StringFormat='0,0.'}">
                         <DataGridTextColumn.ElementStyle>
                             <Style>
                                 <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="규격" Binding="{Binding Path=Standard}">
+                    <DataGridTextColumn Header="규격" Binding="{Binding Path=Plan.Unit.MinorName}">
                         <DataGridTextColumn.ElementStyle>
                             <Style>
                                 <Setter Property="TextBlock.VerticalAlignment" Value="Center" />

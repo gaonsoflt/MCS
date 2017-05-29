@@ -70,7 +70,6 @@ namespace MCS
             }
             else
             {
-                //orderListModel.GetOrderList(viewModel.SelectedFromDate.Ticks, viewModel.SelectedToDate.Ticks);
                 orderListModel.GetOrderList(viewModel.SelectedFromDate, viewModel.SelectedToDate);
             }
         }
@@ -99,7 +98,7 @@ namespace MCS
             var viewModel = this.DataContext as OrderListViewModel;
             if (orderListModel.CheckSearchPeriodSize(viewModel.SelectedFromDate, viewModel.SelectedToDate))
             {
-                MessageBox.Show("조회: " + viewModel.SelectedFromDate.ToString() + " ~ " + viewModel.SelectedToDate.ToString());
+                //MessageBox.Show("조회: " + viewModel.SelectedFromDate.ToString() + " ~ " + viewModel.SelectedToDate.ToString());
                 GetOrderList();
             }
             else
@@ -110,8 +109,11 @@ namespace MCS
 
         private void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DataRowView rowView = dataGrid.SelectedItem as DataRowView;
-            string orderID = rowView.Row["OrderId"].ToString();
+            //DataRowView rowView = dataGrid.SelectedItem as DataRowView;
+            //string orderID = rowView.Row["OrderId"].ToString();
+
+            Order rowView = dataGrid.SelectedItem as Order;
+            string orderID = rowView.OrderId;
             string msg = "[" + orderID + "] 을 선택하시겠습니까?";
             if (MessageBox.Show(msg, "알림", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {

@@ -26,8 +26,11 @@ namespace MCS
         {
             try
             {
-                var _from = BBConvert.CSharpMillisToJavaLong(from) * 1000;
-                var _to = BBConvert.CSharpMillisToJavaLong(to) * 1000;
+                //var _from = BBConvert.CSharpMillisToJavaLong(from) * 1000;
+                //var _to = BBConvert.CSharpMillisToJavaLong(to) * 1000;
+                // TestCode
+                var _from = BBConvert.CSharpMillisToJavaLong(new DateTime(2017,1,23)) * 1000;
+                var _to = BBConvert.CSharpMillisToJavaLong(new DateTime(2017, 1, 24)) * 1000;
 
                 var order = await Task.Run(()
                     => rest.GetAsync<List<Order>>(String.Format("api/workorders/date?from={0}&to={1}", _from.ToString(), _to.ToString())));
