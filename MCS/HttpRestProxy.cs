@@ -77,6 +77,23 @@ namespace MCS
             return null;
         }
 
+        public async Task<HttpResponseMessage> PostAsync(string requestUri, HttpContent content)
+        {
+            Console.WriteLine("[POST] HttpRequest: " + client.BaseAddress + requestUri);
+
+            //client.DefaultRequestHeaders.Accept.Clear();
+            //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            //client.DefaultRequestHeaders.Add("User-Agent", ".NET Foundation Repository Reporter");
+
+            HttpResponseMessage response = await client.PostAsync(requestUri, content);
+            Console.WriteLine("[POST] HttpResponseMessage: " + response.StatusCode);
+            if (response.IsSuccessStatusCode)
+            {
+                return response;
+            }
+            return null;
+        }
+
         public async Task<T> PutAsync<T>(string requestUri, HttpContent content) where T : class
         {
             Console.WriteLine("[PUT] HttpRequest: " + client.BaseAddress + requestUri);

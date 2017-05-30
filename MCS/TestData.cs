@@ -34,7 +34,15 @@ namespace MCS
         //    return table;
         //}
 
-        public static List<Order> GetOrderData()
+        public static Order GetOrderInfo()
+        {
+            Order order = new Order();
+            order.OrderId = "작업지시서-201704020394";
+            order.OrderQty = 1000;
+            return order;
+        }
+
+        public static List<Order> GetOrderList()
         {
             List<Order> list = new List<Order>();
             list.Add(new Order(1, "지시서-20170001"));

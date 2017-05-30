@@ -20,6 +20,9 @@ namespace MCS
     /// </summary>
     public partial class WorkStartDialog : Window
     {
+        private Order NextOrder;
+        WorkStartModel model;
+
         public WorkStartDialog()
         {
             InitializeComponent();
@@ -30,13 +33,40 @@ namespace MCS
         {
             InitializeComponent();
             this.DataContext = new WorkStartViewModel();
+            model = new WorkStartModel();
+            model.OnResult += new WorkStartModel.SetRestResponseHandler(OnResult);
             SetMessage(CurOrderId, nextOrderId);
+        }
+
+        public WorkStartDialog(Order nextOrder)
+        {
+            InitializeComponent();
+            this.DataContext = new WorkStartViewModel();
+            model = new WorkStartModel();
+            model.OnResult += new WorkStartModel.SetRestResponseHandler(OnResult);
+            this.NextOrder = nextOrder;
+            SetMessage(DataModel.GetModel().OrderID, NextOrder.OrderId);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             var viewModel = this.DataContext as WorkStartViewModel;
             viewModel.SelectedStartDt = DateTime.Now;
+        }
+
+        private void OnResult(object obj)
+        {
+            if(obj != null)
+            {
+                if (obj.GetType() == typeof(String))
+                {
+                    // 귀찮아서 그냥 코딩~
+                    // API Call 새로운 작업으로 변경
+                    DataModel.GetModel().Order = this.NextOrder;
+                    this.DialogResult = true;
+                    this.Close();
+                }
+            }
         }
 
         public String Message
@@ -71,10 +101,13 @@ namespace MCS
             Button btn = sender as Button;
             if (btn == btnStart)
             {
-                // API Call 새로운 작업으로 변경
-                DataModel.GetModel().Order = new Order();
-                this.DialogResult = true;
-                this.Close();
+                WorkHistory history = new WorkHistory(
+                    NextOrder.CompSeq, 
+                    NextOrder.OrderId, 
+                    DataModel.GetModel().Equipment.ToolId, 
+                    DataModel.GetModel().User.UserId,
+                    viewModel.SelectedStartDt);
+                model.SaveWorkStart(history);
             }
             else
             {

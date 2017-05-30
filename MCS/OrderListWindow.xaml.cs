@@ -66,7 +66,7 @@ namespace MCS
             var viewModel = this.DataContext as OrderListViewModel;
             if (DataModel.GetModel().IsTest)
             {
-                SetOrderList(TestData.GetOrderData());
+                SetOrderList(TestData.GetOrderList());
             }
             else
             {
@@ -121,6 +121,8 @@ namespace MCS
                 if (window.ShowDialog().Value)
                 {
                     // 정상적으로 처리 되었기때문에 ture가 넘어오면 바로 가동현황으로 넘어간다
+                    ProcessWindow window2 = new ProcessWindow();
+                    window2.Show();
                     this.Close();
                 }
             }

@@ -75,8 +75,11 @@
       <DependentUpon>CntlWorkCenter.xaml</DependentUpon>
     </Compile>
     <Compile Include="EquipmentModel.cs" />
+    <Compile Include="Model\WorkHistory.cs" />
     <Compile Include="Model\Plan.cs" />
     <Compile Include="Model\Item.cs" />
+    <Compile Include="WorkStartModel.cs" />
+    <Compile Include="OrderModel.cs" />
     <Compile Include="OrderListModel.cs" />
     <Compile Include="Model\DataModel.cs" />
     <Compile Include="HttpRestProxy.cs" />

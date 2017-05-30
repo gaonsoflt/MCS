@@ -20,44 +20,76 @@ namespace MCS
     /// </summary>
     public partial class ProcessWindow : Window
     {
+        OrderModel model;
+
         public ProcessWindow()
         {
             InitializeComponent();
             this.DataContext = new ProcessViewModel();
+            model = new OrderModel();
+            model.OnResult += new OrderModel.SetRestResponseHandler(OnResult);
+        }
+
+        private void OnResult(object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetType() == typeof(WorkHistory))
+                {
+                    WorkHistory his = obj as WorkHistory;
+                    model.GetOrder(his.WorkOrderNo);
+                }
+                else if (obj.GetType() == typeof(Order))
+                {
+                    Order order = obj as Order;
+                    DataModel.GetModel().Order = order;
+                    UpdateForm(order);
+                }
+            }
+            else
+            {
+                UpdateForm(null);
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            UpdateForm(GetOrderInfo());
+            UpdateWorkCenterForm();
+            GetWorkOrder();
         }
 
-        private DataModel GetOrderInfo()
+        private void GetWorkOrder()
         {
-            // API call get order data
-            //DataModel model = null;
+            if (DataModel.GetModel().IsTest)
+            {
+                UpdateForm(TestData.GetOrderInfo());
+            }
+            else
+            {
+                model.GetLatestWorkHistoryByToolId(DataModel.GetModel().Equipment.ToolId);
+            }
+        }
+
+        private void UpdateWorkCenterForm()
+        {
+            var viewModel = this.DataContext as ProcessViewModel;
             DataModel model = DataModel.GetModel();
-            model.OrderID = "작업지시서-201704020394";
-            model.WorkStartDT = DateTime.Now;
-            model.Quantity = 10000;
-            /******************************************/
-            return model;
+            viewModel.WorkCenter = model.WorkCenterName;
+            viewModel.Equipment = model.EquipmentName;
+            viewModel.Worker = model.Worker;
         }
 
-        private void UpdateForm(DataModel model)
+        private void UpdateForm(Order order)
         {
-            if (model != null)
+            if (order != null)
             {
                 EnableButton(true);
                 gridForm.Visibility = Visibility.Visible;
                 gridNonForm.Visibility = Visibility.Collapsed;
 
                 var viewModel = this.DataContext as ProcessViewModel;
-                viewModel.WorkCenter = model.WorkCenterName;
-                viewModel.Equipment = model.EquipmentName;
-                viewModel.Worker = model.Worker;
-                viewModel.OrderID = model.OrderID;
-                viewModel.Quantity = model.Quantity;
-                viewModel.WorkStartDT = model.WorkStartDT;
+                viewModel.OrderID = order.OrderId;
+                viewModel.Quantity = order.OrderQty;
             }
             else
             {
@@ -80,7 +112,8 @@ namespace MCS
             if (btn == btnOrder)
             {
                 OrderListWindow window = new OrderListWindow();
-                window.ShowDialog();
+                window.Show();
+                Close();
             }
             else if (btn == btnEquipment)
             {

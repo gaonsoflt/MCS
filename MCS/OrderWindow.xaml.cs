@@ -20,25 +20,31 @@ namespace MCS
     /// </summary>
     public partial class OrderWindow : Window
     {
-        string orderID;
+        OrderModel model;
+        Order order;
 
         public OrderWindow()
         {
             InitializeComponent();
             this.DataContext = new OrderViewModel();
+            model = new OrderModel();
+            model.OnResult += new OrderModel.SetRestResponseHandler(OnResult);
         }
 
-        public OrderWindow(string orderID)
+        public OrderWindow(string orderId)
         {
             InitializeComponent();
-            this.orderID = orderID;
+            this.order = new Order();
+            this.order.OrderId = orderId;
             this.DataContext = new OrderViewModel();
+            model = new OrderModel();
+            model.OnResult += new OrderModel.SetRestResponseHandler(OnResult);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             UpdateWorkCenterForm();
-            UpdateForm();
+            GetOrderInfo();
         }
 
         private void UpdateWorkCenterForm()
@@ -49,18 +55,33 @@ namespace MCS
             viewModel.Equipment = model.EquipmentName;
             viewModel.Worker = model.Worker;
 
-            viewModel.OrderID = orderID;
         }
 
-        private void UpdateForm()
+        private void UpdateForm(Order order)
         {
-            // GetOrderInfo Call 하여 작업지시 정보를 폼에 출력
-
+            var viewModel = this.DataContext as OrderViewModel;
+            viewModel.OrderID = order.OrderId;
+            viewModel.PlanQuantity = order.Plan.ProdPlanQty;
+            viewModel.MaterialInfo = order.Item.ItemName;
         }
 
         private void GetOrderInfo()
         {
+            // GetOrderInfo Call 하여 작업지시 정보를 폼에 출력
+            model.GetOrder(order.OrderId);
+        }
 
+        private void OnResult(object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetType() == typeof(Order))
+                {
+                    Order order = obj as Order;
+                    this.order = order;
+                    UpdateForm(order);
+                }
+            }
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
@@ -88,8 +109,9 @@ namespace MCS
                 //    this.Close();
                 //}
 
-                WorkStartDialog dlg = new WorkStartDialog(DataModel.GetModel().OrderID, viewModel.OrderID);
-                if(dlg.ShowDialog().Value)
+                //WorkStartDialog dlg = new WorkStartDialog(DataModel.GetModel().OrderID, viewModel.OrderID);
+                WorkStartDialog dlg = new WorkStartDialog(order);
+                if (dlg.ShowDialog().Value)
                 {
                     this.DialogResult = true;
                     this.Close();
@@ -97,12 +119,12 @@ namespace MCS
             }
             else if (btn == btnProduct)
             {
-                ProductRecordWindow window = new ProductRecordWindow(viewModel.OrderID);
+                ProductRecordWindow window = new ProductRecordWindow(order.OrderId);
                 window.ShowDialog();
             }
             else
             {
-                RunStopWindow window = new RunStopWindow(viewModel.OrderID);
+                RunStopWindow window = new RunStopWindow(order.OrderId);
                 window.ShowDialog();
             }
         }
