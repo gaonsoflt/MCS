@@ -20,7 +20,7 @@ namespace MCS
     /// </summary>
     public partial class WorkStartDialog : Window
     {
-        private Order NextOrder;
+        private WorkOrder NextOrder;
         WorkStartModel model;
 
         public WorkStartDialog()
@@ -38,7 +38,7 @@ namespace MCS
             SetMessage(CurOrderId, nextOrderId);
         }
 
-        public WorkStartDialog(Order nextOrder)
+        public WorkStartDialog(WorkOrder nextOrder)
         {
             InitializeComponent();
             this.DataContext = new WorkStartViewModel();

@@ -8,13 +8,13 @@ using System.Runtime.Serialization;
 namespace MCS.Model
 {
     [DataContract]
-    public class Order
+    public class WorkOrder
     {
-        public Order()
+        public WorkOrder()
         {
         }
 
-        public Order(long compSeq, String orderId)
+        public WorkOrder(long compSeq, String orderId)
         {
             this.CompSeq = compSeq;
             this.OrderId = orderId;
@@ -56,5 +56,8 @@ namespace MCS.Model
 
         [DataMember(Name = "empSeq")]
         public long EmpSeq { get; set; }
+
+        [DataMember(Name = "prodSummary")]
+        public ProdSummary ProdSummary { get; set; }
     }
 }

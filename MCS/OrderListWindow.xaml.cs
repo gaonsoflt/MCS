@@ -78,15 +78,15 @@ namespace MCS
         {
             if (obj != null)
             {
-                if (obj.GetType() == typeof(List<Order>))
+                if (obj.GetType() == typeof(List<WorkOrder>))
                 {
-                    List<Order> list = obj as List<Order>;
+                    List<WorkOrder> list = obj as List<WorkOrder>;
                     SetOrderList(list);
                 }
             }
         }
 
-        private void SetOrderList(List<Order> list)
+        private void SetOrderList(List<WorkOrder> list)
         {
             var viewModel = this.DataContext as OrderListViewModel;
             viewModel.OrderList = list;
@@ -112,7 +112,7 @@ namespace MCS
             //DataRowView rowView = dataGrid.SelectedItem as DataRowView;
             //string orderID = rowView.Row["OrderId"].ToString();
 
-            Order rowView = dataGrid.SelectedItem as Order;
+            WorkOrder rowView = dataGrid.SelectedItem as WorkOrder;
             string orderID = rowView.OrderId;
             string msg = "[" + orderID + "] 을 선택하시겠습니까?";
             if (MessageBox.Show(msg, "알림", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
@@ -121,8 +121,8 @@ namespace MCS
                 if (window.ShowDialog().Value)
                 {
                     // 정상적으로 처리 되었기때문에 ture가 넘어오면 바로 가동현황으로 넘어간다
-                    ProcessWindow window2 = new ProcessWindow();
-                    window2.Show();
+                    //ProcessWindow window2 = new ProcessWindow();
+                    //window2.Show();
                     this.Close();
                 }
             }

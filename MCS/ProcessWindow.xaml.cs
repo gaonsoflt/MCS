@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace MCS
 {
@@ -21,6 +22,7 @@ namespace MCS
     public partial class ProcessWindow : Window
     {
         OrderModel model;
+        DispatcherTimer timer;
 
         public ProcessWindow()
         {
@@ -28,33 +30,24 @@ namespace MCS
             this.DataContext = new ProcessViewModel();
             model = new OrderModel();
             model.OnResult += new OrderModel.SetRestResponseHandler(OnResult);
-        }
-
-        private void OnResult(object obj)
-        {
-            if (obj != null)
-            {
-                if (obj.GetType() == typeof(WorkHistory))
-                {
-                    WorkHistory his = obj as WorkHistory;
-                    model.GetOrder(his.WorkOrderNo);
-                }
-                else if (obj.GetType() == typeof(Order))
-                {
-                    Order order = obj as Order;
-                    DataModel.GetModel().Order = order;
-                    UpdateForm(order);
-                }
-            }
-            else
-            {
-                UpdateForm(null);
-            }
+            timer = new DispatcherTimer();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             UpdateWorkCenterForm();
+            GetWorkOrder();
+            InitTimer();
+        }
+
+        private void InitTimer()
+        {
+            timer.Interval = TimeSpan.FromMilliseconds(5000);
+            timer.Tick += new EventHandler(timer_Tick);
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
             GetWorkOrder();
         }
 
@@ -79,23 +72,49 @@ namespace MCS
             viewModel.Worker = model.Worker;
         }
 
-        private void UpdateForm(Order order)
+        private void UpdateForm(WorkOrder order)
         {
             if (order != null)
             {
+                timer.Start();
+
                 EnableButton(true);
                 gridForm.Visibility = Visibility.Visible;
                 gridNonForm.Visibility = Visibility.Collapsed;
 
                 var viewModel = this.DataContext as ProcessViewModel;
                 viewModel.OrderID = order.OrderId;
-                viewModel.Quantity = order.OrderQty;
+                viewModel.PlanQuantity = order.ProdSummary.NormalQty;
             }
             else
             {
                 EnableButton(false);
                 gridForm.Visibility = Visibility.Collapsed;
                 gridNonForm.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void OnResult(object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetType() == typeof(WorkHistory))
+                {
+                    WorkHistory his = obj as WorkHistory;
+                    DataModel.GetModel().WorkHistory = his;
+                    //model.GetOrder(his.WorkOrderNo);
+                    UpdateForm(his.WorkOrder);
+                }
+                //else if (obj.GetType() == typeof(Order))
+                //{
+                //    Order order = obj as Order;
+                //    DataModel.GetModel().Order = order;
+                //    UpdateForm(order);
+                //}
+            }
+            else
+            {
+                UpdateForm(null);
             }
         }
 
@@ -112,24 +131,29 @@ namespace MCS
             if (btn == btnOrder)
             {
                 OrderListWindow window = new OrderListWindow();
-                window.Show();
-                Close();
+                timer.Stop();
+                window.ShowDialog();
+                timer.Start();
             }
             else if (btn == btnEquipment)
             {
                 EquipmentWindow window = new EquipmentWindow();
-                window.ShowDialog();
+                window.Show();
                 this.Close();
             }
             else if (btn == btnProduct)
             {
                 ProductRecordWindow window = new ProductRecordWindow(viewModel.OrderID);
+                timer.Stop();
                 window.ShowDialog();
+                timer.Start();
             }
             else
             {
                 RunStopWindow window = new RunStopWindow(viewModel.OrderID);
+                timer.Stop();
                 window.ShowDialog();
+                timer.Start();
             }
         }
 
@@ -140,6 +164,14 @@ namespace MCS
                 LoginWindow window = new LoginWindow();
                 window.Show();
                 this.Close();
+            }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (timer.IsEnabled)
+            {
+                timer.Stop();
             }
         }
     }

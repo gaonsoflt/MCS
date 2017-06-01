@@ -33,7 +33,7 @@ namespace MCS
                 var _to = BBConvert.CSharpMillisToJavaLong(new DateTime(2017, 1, 24)) * 1000;
 
                 var order = await Task.Run(()
-                    => rest.GetAsync<List<Order>>(String.Format("api/workorders/date?from={0}&to={1}", _from.ToString(), _to.ToString())));
+                    => rest.GetAsync<List<WorkOrder>>(String.Format("api/workorders/date?from={0}&to={1}", _from.ToString(), _to.ToString())));
 
                 OnResult(order);
             }

@@ -79,8 +79,8 @@ namespace MCS
         //    }
         //}
 
-        private List<Order> orderList;
-        public List<Order> OrderList
+        private List<WorkOrder> orderList;
+        public List<WorkOrder> OrderList
         {
             get { return this.orderList; }
             set

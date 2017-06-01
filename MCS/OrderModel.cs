@@ -27,7 +27,7 @@ namespace MCS
             try
             {
                 var order = await Task.Run(()
-                    => rest.GetAsync<Order>(String.Format("api/workorders/{0}", id)));
+                    => rest.GetAsync<WorkOrder>(String.Format("api/workorders/{0}", id)));
 
                 OnResult(order);
             }

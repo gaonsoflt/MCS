@@ -75,6 +75,7 @@
       <DependentUpon>CntlWorkCenter.xaml</DependentUpon>
     </Compile>
     <Compile Include="EquipmentModel.cs" />
+    <Compile Include="Model\ProdSummary.cs" />
     <Compile Include="Model\WorkHistory.cs" />
     <Compile Include="Model\Plan.cs" />
     <Compile Include="Model\Item.cs" />
@@ -86,7 +87,7 @@
     <Compile Include="LoginModel.cs" />
     <Compile Include="Model\CodeMinor.cs" />
     <Compile Include="Model\RunStopData.cs" />
-    <Compile Include="Model\Order.cs" />
+    <Compile Include="Model\WorkOrder.cs" />
     <Compile Include="Model\Equipment.cs" />
     <Compile Include="Model\WorkCenter.cs" />
     <Compile Include="Model\User.cs" />

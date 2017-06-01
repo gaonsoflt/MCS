@@ -34,20 +34,20 @@ namespace MCS
         //    return table;
         //}
 
-        public static Order GetOrderInfo()
+        public static WorkOrder GetOrderInfo()
         {
-            Order order = new Order();
+            WorkOrder order = new WorkOrder();
             order.OrderId = "작업지시서-201704020394";
             order.OrderQty = 1000;
             return order;
         }
 
-        public static List<Order> GetOrderList()
+        public static List<WorkOrder> GetOrderList()
         {
-            List<Order> list = new List<Order>();
-            list.Add(new Order(1, "지시서-20170001"));
-            list.Add(new Order(1, "지시서-20170002"));
-            list.Add(new Order(1, "지시서-20170003"));
+            List<WorkOrder> list = new List<WorkOrder>();
+            list.Add(new WorkOrder(1, "지시서-20170001"));
+            list.Add(new WorkOrder(1, "지시서-20170002"));
+            list.Add(new WorkOrder(1, "지시서-20170003"));
             return list;
         }
 

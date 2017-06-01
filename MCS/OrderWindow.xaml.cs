@@ -21,7 +21,7 @@ namespace MCS
     public partial class OrderWindow : Window
     {
         OrderModel model;
-        Order order;
+        WorkOrder order;
 
         public OrderWindow()
         {
@@ -34,7 +34,7 @@ namespace MCS
         public OrderWindow(string orderId)
         {
             InitializeComponent();
-            this.order = new Order();
+            this.order = new WorkOrder();
             this.order.OrderId = orderId;
             this.DataContext = new OrderViewModel();
             model = new OrderModel();
@@ -57,7 +57,7 @@ namespace MCS
 
         }
 
-        private void UpdateForm(Order order)
+        private void UpdateForm(WorkOrder order)
         {
             var viewModel = this.DataContext as OrderViewModel;
             viewModel.OrderID = order.OrderId;
@@ -75,9 +75,9 @@ namespace MCS
         {
             if (obj != null)
             {
-                if (obj.GetType() == typeof(Order))
+                if (obj.GetType() == typeof(WorkOrder))
                 {
-                    Order order = obj as Order;
+                    WorkOrder order = obj as WorkOrder;
                     this.order = order;
                     UpdateForm(order);
                 }

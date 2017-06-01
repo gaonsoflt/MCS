@@ -41,5 +41,8 @@ namespace MCS.Model
 
         [DataMember(Name = "startDt")]
         public long StartDt { get; set; }
+
+        [DataMember(Name = "workOrder")]
+        public WorkOrder WorkOrder { get; set; }
     }
 }

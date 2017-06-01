@@ -23,8 +23,18 @@ namespace MCS.Model
         {
             this.user = new User();
             this.workCenter = new WorkCenter();
-            this.order = new Order();
+            this.order = new WorkOrder();
             this.equipment = new Equipment();
+        }
+
+        private WorkHistory workHistory;
+        public WorkHistory WorkHistory
+        {
+            get { return this.workHistory; }
+            set
+            {
+                this.workHistory = value;
+            }
         }
 
         private WorkCenter workCenter;
@@ -104,8 +114,8 @@ namespace MCS.Model
             }
         }
 
-        private Order order;
-        public Order Order
+        private WorkOrder order;
+        public WorkOrder Order
         {
             get { return this.order; }
             set
